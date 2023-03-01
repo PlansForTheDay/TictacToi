@@ -12,7 +12,34 @@
 <script async src="scripts.js"></script>
            
 <body class="background">
-    <div id="block" class="block">
+    <div class="toolsBlock">
+        <div class="menuItem">
+            <div class="played">Сыграно:
+                <span id="playedCounter" class="counter">0</span>
+            </div>
+        </div>
+        <div class="menuItem">
+            <div class="victories">Победы:
+                <div style="display: grid; grid-template-columns: 3.5vw 1vw max-content; grid-gap: 1vw;">
+                    <div class="cross" style="height: 3vw; width: 3vw; margin: 1vw;"></div>
+                    <label style="font-size: 3.1vw;"> : </label>
+                    <span id="crossVictories" class="counter">0</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 3.5vw 1vw max-content; grid-gap: 1vw;">
+                    <div class="circle" style="height: 2.65vw; width: 2.65vw; margin: 1vw;"></div>
+                    <label style="font-size: 3.1vw;"> : </label>
+                    <span id="circleVictories" class="counter">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="menuItem">
+            <div class="restart">Перезапустить</div>
+            <button class="restartButton" onclick="Restart_click()">Restart</button>
+        </div>
+        <label style="margin:2vw; font-size: 2.3vw;">number 21 did it</label>
+    </div>
+
+    <div id="block" class="gameBlock">
         <h1 class="header">Игровое поле</h1>
 
         <div class="grid-conteiner">
@@ -35,7 +62,9 @@
             <div id="9" class="cell" onclick="Draw_Cell(this)"></div>
         </div>
 
-        
+        <div id="victoryNotice" class="victory-notice">Игра в полном разгаре</div>
     </div>
+
+
 </body>
 </html>

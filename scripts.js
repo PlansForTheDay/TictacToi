@@ -1,5 +1,14 @@
+function Restart_click(){
+    for (var cell = 1; cell <= 9; cell++){
+        var activeCell = document.getElementById(cell);
+        if(activeCell.childElementCount > 0)
+            activeCell.removeChild(activeCell.firstChild);
+    }
+    document.getElementById("victoryNotice").textContent = "Игра в полном разгаре";
+}
+
 function Draw_Cell(gameCell){
-    if (gameCell.firstChild < 1 && document.getElementById("victoryNotice") == null){
+    if (gameCell.firstChild < 1 && document.getElementById("victoryNotice").textContent == "Игра в полном разгаре"){
         var picture = document.createElement("div");
         var symbol = "cross";
         picture.className = symbol;
@@ -12,7 +21,7 @@ function Draw_Cell(gameCell){
         }
         else if(!result.symbol && !result.opponent){
             for (var round = 0; round < 9; round++){
-                if (document.getElementById(round + 1).firstChild < 1 && document.getElementById("victoryNotice") == null){
+                if (document.getElementById(round + 1).firstChild < 1 && document.getElementById("victoryNotice").textContent == "Игра в полном разгаре"){
                     console.log("Имеется пустая ячейка и нет табло")
                     OpponentMoves(symbol);
                     break;
@@ -41,7 +50,7 @@ function OpponentMoves(symbol){
     //for (var round = 0; round < 90; round++){
         var num = getRandomInt(9);
         console.log("Бот выбрал ячейку: " + num)
-        if (document.getElementById(num).firstChild < 1 && document.getElementById("victoryNotice") == null){
+        if (document.getElementById(num).firstChild < 1 && document.getElementById("victoryNotice").textContent == "Игра в полном разгаре"){
             var picture = document.createElement("div");
             picture.className = opponentSymbol;
             document.getElementById(num).appendChild(picture);
@@ -62,26 +71,24 @@ function getRandomInt(max) {
   }
 function Conclusions(result){
     if (result.symbol == true && result.opponent == false){
-        ResultOutput("Вы победили,\n обновите страницу и сыграйте ещё раз");
+        ResultOutput("Вы победили, сыграйте ещё раз");
+        document.getElementById("crossVictories").textContent++;
         console.log("Игрок победил")
     }
     else if (result.symbol == false && result.opponent == true){
-        ResultOutput("Вы проиграли,\n обновите страницу и попробуйте ещё раз");
+        ResultOutput("Вы проиграли, возьмите реванш");
+        document.getElementById("circleVictories").textContent++;
         console.log("Бот победил")
     }
     else{
-        ResultOutput("Ничья,\n обновите страницу и попробуйте ещё раз");
+        ResultOutput("Ничья, лучше повторить");
         console.log("Ничья")
     }
+    document.getElementById("playedCounter").textContent++;
     console.log("Оглашён результат")
 }
 function ResultOutput(message){
-    var wonMess = document.createElement("div");
-    wonMess.className = "victory-notice";
-    wonMess.id = "victoryNotice";
-    wonMess.innerText = message;
-
-    document.getElementById("block").appendChild(wonMess);
+    document.getElementById("victoryNotice").textContent = message;
 }
 
 function IdConverter(id){
